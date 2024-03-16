@@ -1,0 +1,40 @@
+﻿body {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: lightpink;
+}
+
+li {
+    float: left;
+}
+
+ul li {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 12px 14px;
+    text-decoration: auto;
+}
+
+
+li a:hover:not(.active) {
+    background-color: lightpink;
+}
+
+footer {
+    text-align: center;
+    color: white;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    padding: 20px;
+    margin: 5px auto 0 auto;
+    background-color: hotpink;
+}

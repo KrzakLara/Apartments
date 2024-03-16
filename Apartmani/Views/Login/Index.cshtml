@@ -1,0 +1,48 @@
+﻿@model Apartmani.Models.UserModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="container mb-5">
+    <h3>Log in</h3> 
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+
+        <b>
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" }) </b>
+            <div class="col-sm-4">
+
+                <b>      @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })  </b>
+                <b>   @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" }) </b>
+</div>
+</div>
+
+    <div class="form-group">
+        <b>
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        </b>
+            <div class="col-sm-4">
+                <b>
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                </b>
+                <b> @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" }) </b>
+</div>
+</div>
+    <br />
+    <br />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+

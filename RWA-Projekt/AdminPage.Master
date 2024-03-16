@@ -1,0 +1,126 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminPage.master.cs" Inherits="RWA_Projekt.AdminPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+
+    <title></title>
+
+
+    <asp:ContentPlaceHolder ID="Head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <!-- BOOTSTRAP -->
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+
+
+    <!-- CUSTOM CSS -->
+    <style>
+        fieldset {
+            border: 1px solid #ced4da;
+            padding: inherit;
+            border-radius: 4px;
+        }
+
+            fieldset > legend {
+                float: initial;
+                width: auto;
+                padding: revert;
+                font-size: initial;
+                margin: 0;
+            }
+    </style>
+
+    <%--cdn file--%>
+    <%--css za tablice--%>
+    <link rel="sylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+
+</head>
+<body>
+    <form id="web_app" runat="server">
+              <% if (Session["user"] != null)
+                        { %>
+                    <a class='navbar-nav d-flex' href="/Login">
+                        
+                <img src="Images/AlgebrinLogo.png" style="height: 87px; width: 123px" />
+                <a class='navbar-brand' href='ApartmentsList.aspx'>RWA Apartments</a>
+                        <a class='navbar-nav d-flex' href="ApartmentsList.aspx">                         
+                    <% }%>
+        <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+            <div class='container-fluid'>
+                <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+                    <span class='navbar-toggler-icon'></span>
+                </button>
+                <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+                    <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
+                        <% if (Session["user"] == null)
+                        { %>
+                          <li class='nav-item'>
+                            <a class='nav-link' href='/'>Login</a>
+                        </li>
+                    <% } 
+                        else
+                           { %>
+                        <li class='nav-item'>
+                            <a class='nav-link' href='ApartmentsList.aspx'>Apartments</a>
+                        </li>
+                        <li class='nav-item'>
+                            <a class='nav-link' href='Tags.aspx'>Tags</a>
+                        </li>
+                        <li class='nav-item'>
+                            <a class='nav-link' href='RegisteredUsers.aspx'>Registered users</a>
+                        </li>
+
+                          <% } %>
+                    </ul>
+
+                   <% if (Session["user"] != null)
+                        { %>
+                    <ul class='navbar-nav d-flex'">
+                        <li class="nav-item">
+                        <asp:Button ID="btnLogOut" OnClick="btnLogout_Click" CssClass="btn"  runat="server" Text="Log out" BorderColor="lightpink" BackColor="lightpink" ForeColor="Black" Font-Bold="true"/>
+                       </li>
+                       </ul>
+                    <% } %>
+                       
+                </div>
+            </div>
+        </nav>
+
+        <div>
+            <asp:ContentPlaceHolder ID="Content" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <footer>
+            <!-- Footer 1 -->
+            <div id="footer1" class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                       <b> <p style="color: black;">&copy RWA Apartments- Lara Kržak (2022.) <a class="footerlinks" href="#" target="_blank"></a></p></b>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+
+    </form>
+
+    <!-- JQUERY -->
+    <script src="Scripts/jquery-3.6.0.min.js"></script>
+
+    <!-- BOOTSTRAP -->
+    <script src="Scripts/bootstrap.min.js"></script>
+
+    <%--js za tablice--%>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>$(document).ready(function () {
+            $('#myTable').DataTable();
+        });</script>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    string errors = ViewBag.error as string;
+    if (Session["user"] != null)
+    {
+        Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    }
+    else
+    {
+        Layout = "/Views/Shared/_Layout.cshtml";
+    }
+    }
+
+<h2>Error page</h2>
+<div class="container">
+    <h1>Error</h1>
+
+    <h2>Error page</h2>
+
+    <div class="alert alert-warning">
+        <p>@errors</p>
+    </div>
+
+    <hr />
+
+    @Html.ActionLink("Return to home page", controllerName: "Home", actionName: "Index")
+
+</div>
+

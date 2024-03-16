@@ -1,0 +1,296 @@
+﻿@using RwaLib.Models
+@{
+    ViewBag.Title = "Reserve";
+
+    Apartment apartment = ViewBag.apartment as Apartment;
+    int apartmentId = apartment.Id;
+    string apartmentOwner = ViewBag.apartmentOwner as string;
+    List<ApartmentPicture> apartmentPictures = ViewBag.apartmentPictures as List<ApartmentPicture>;
+
+    if (Session["user"] != null)
+    {
+        Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+    User user = Session["user"] as User;
+
+
+    IList<Tag> tags = ViewBag.tags as List<Tag>;
+
+
+}
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Reserve apartment</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+</head>
+
+<style>
+    .leftside, .rightside {
+        width: 100%;
+    }
+
+    .leftside {
+        margin-left: 10px;
+    }
+
+    .swiper {
+        width: 800px;
+        height: 500px;
+    }
+</style>
+
+<div class="row">
+    <div class="col">
+        <div class="leftside">
+            <h2><b>@apartment.NameEng</b></h2>
+            <div class="d-flex flex-row">
+                <div>
+                    <img src="@apartmentPictures.FirstOrDefault(p => p.ApartmentId == apartmentId && p.IsRepresentative).Path"
+                         width="400" height="350" style="object-fit: cover; padding: 8px;" />
+                </div>
+                <div style="margin-left:10px; padding-top:10px;">
+                   
+
+                    <p><b>Price: </b> @apartment.Price €</p>
+
+                    <p><b>Beach distance: </b>@apartment.BeachDistance m</p>
+
+                    <p><b>Rooms: </b>@apartment.TotalRooms</p>
+
+                    <p><b>Adults: </b>@apartment.MaxAdults</p>
+
+                    <p><b>Children: </b>@apartment.MaxChildren</p>
+
+                    <p><b>Owner: </b>@apartmentOwner</p>
+
+                    @for (int i = 0; i < apartment.Review; i++)
+                    {
+                        <b>&#9733;</b>
+                    }
+                </div>
+            </div>
+
+
+            <!--Tags-->
+            <div>
+                <b>Tags:</b>
+                @foreach (Tag tag in tags)
+                {
+                    <p style="margin:0;">
+                        &#9829;@tag.NameEng
+                    </p>
+                }
+            </div>
+        </div>
+
+    </div>
+    <!--Kontaktna forma-->
+    <div class="col">
+        <div class="rightside" style="border-left:5px solid thin deeppink; padding-left:10px;">
+            <div style="width:80%;">
+                <h2>Contact form</h2>
+                @if (Session["user"] != null)
+                {
+
+                    <p><b>Name:</b> @Html.TextBox("firstName", user.FirstName) </p>
+                    <p><b> Last name:</b>@Html.TextBox("lastName", user.LastName)</p>
+
+                    <p><b>E-mail:</b> @Html.TextBox("email", user.Email, new { @type = "email", @style = "width:82%;" })</p>
+
+                    <p><b>Phone/mobile:</b> @Html.TextBox("phone", user.PhoneNumber, new { @style = "width:60%;", @type = "phone" })</p>
+
+
+                    <p>
+                        <b>Adults:</b> @Html.TextBox("adults", null, new { @type = "number", @min = "0", @style = "width:10%;" })
+                        <b>Children:</b> @Html.TextBox("children", null, new { @type = "number", @min = "0", @style = "width:10%" })
+                    </p>
+
+
+                    <p><b>From </b> @Html.TextBox("dateFrom", null, new { @type = "date" })</p>
+                    <p><b>To </b>@Html.TextBox("dateTo", null, new { @type = "date" })</p>
+                    <div>
+                        <input id="test" type="submit" value="Reservation" class="btn btn-primary" />
+                    </div>
+
+                }
+                else
+                {
+
+                    <p>
+                        <b>
+                            Name:
+                        </b> @Html.TextBox("firstName", null, new { id = "firstName" })
+                    </p>
+                    <p>
+                        <b> Lastname: </b>@Html.TextBox("lastName", null, new { id = "lastName" })
+                    </p>
+                    <p><b>E-mail: </b> @Html.TextBox("email", null, new { @type = "email", @style = "width:82%;", id = "email" })</p>
+
+                    <p><b>Phone: </b> @Html.TextBox("phone", null, new { @style = "width:60%;", @type = "phone", id = "phone" })</p>
+
+                    <p><b>Maximum adults: </b> @Html.TextBox("adults", null, new { @type = "number", @min = "0", @style = "width:10%;", id = "adults" })</p>
+                    <p><b>Maximum children: </b> @Html.TextBox("children", null, new { @type = "number", @min = "0", @style = "width:10%", id = "children" })</p>
+
+                    <p><b>From </b> @Html.TextBox("dateFrom", null, new { @type = "date", id = "dateFrom" })</p>
+                    <p><b>To  </b>@Html.TextBox("dateTo", null, new { @type = "date", id = "dateTo" })</p>
+                    <div>
+                        <input id="test" type="submit" value="Reservation" class="btn btn-primary" />
+                    </div>
+
+                }
+
+                <form method="post" class="mt-2" onsubmit="return submitUserForm();">
+                    <div class="g-recaptcha" data-sitekey="6LcuZJ0gAAAAAJzwMl9hb_XzafpzUNk6NubaaBbI" data-callback="verifyCaptcha"></div>
+                    <div id="g-recaptcha-error"></div>
+                </form>
+                <!--Povratna informacija-->
+                @if (user != null)
+                {
+                    <h2>Review</h2>
+
+                    <p><b>Description: </b> @Html.TextBox("description", null, new { @style = "width:400px;", id = "description" })</p>
+                    <p><b>Stars: </b> @Html.TextBox("stars", null, new { @type = "number", @min = "1", @max = "5", id = "stars" })</p>
+                    <div>
+                        <input id="btnReview" type="submit" value="Review" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                @foreach (ApartmentPicture picture in apartmentPictures)
+                {
+                    <div class="swiper-slide" style="object-fit:scale-down;"><img src="@picture.Path" /></div>
+                }
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+
+        @section scripts{
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+            <script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
+
+            <script>
+                const swiper = new Swiper('.swiper', {
+                    direction: 'horizontal',
+                    loop: true,
+
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+
+                    scrollbar: {
+                        el: '.swiper-scrollbar',
+                    },
+                });
+            </script>
+
+            <!--reCAPTCHA  => system that enables web hosts to distinguish between human and automated access to websites-->
+
+            <script>
+                $(document).ready(function () {
+                    $("#test").hide();
+                });
+                var recaptcha_response = '';
+                function submitUserForm() {
+                    if (recaptcha_response.length == 0) {
+                        document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
+                        return false;
+                    }
+                    return true;
+                }
+
+                function verifyCaptcha(token) {
+                    recaptcha_response = token;
+                    document.getElementById('g-recaptcha-error').innerHTML = '';
+                    $("#test").show();
+                }
+            </script>
+
+
+            <script>
+                document.getElementById('btnReview').addEventListener('click', function () {
+                    let desc = document.getElementById('description').value;
+                    let stars = document.getElementById('stars').value;
+
+
+                    var obj = {
+                        aptid: parseInt("@apartmentId"),
+                        stars: parseInt(stars),
+                        desc: desc,
+                        userId: parseInt("@((user != null) ? user.Id : 0)")
+                    };
+
+                    $.ajax({
+                        url: '/Home/SendReview/',
+                        method: 'POST',
+                        data: obj,
+                        success: function () {
+                            alert('uspjeh');
+                        }
+                    });
+                });
+
+            </script>
+
+
+            <script>
+                document.getElementById('test').addEventListener('click', function () {
+                    let firstName = document.getElementById('firstName').value;
+                    let lastName = document.getElementById('lastName').value;
+                    let email = document.getElementById('email').value;
+                    let phone = document.getElementById('phone').value;
+                    let adults = document.getElementById('adults').value;
+                    let children = document.getElementById('children').value;
+                    let fromDate = document.getElementById('dateFrom').value;
+                    let toDate = document.getElementById('dateTo').value;
+
+                    var obj = {
+                        aptid: parseInt("@apartmentId"),
+                        fname: firstName,
+                        lname: lastName,
+                        email: email,
+                        phone: phone,
+                        adults: adults,
+                        children: children,
+                        fromDate: fromDate,
+                        toDate: toDate
+                    };
+
+                    $.ajax({
+                        url: '/Home/SendReservation/',
+                        method: 'POST',
+                        data: obj,
+                        success: function () {
+                            alert('uspjeh');
+                        }
+                    });
+                });
+            </script>
+
+    }

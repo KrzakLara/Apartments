@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RWA-Projekt", "RWA-Projekt\RWA-Projekt.csproj", "{A2FF4F9E-109E-4A17-88F0-56C611C356A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RwaLib", "RwaLib\RwaLib.csproj", "{A5E5B0EB-6077-4BBA-87D5-FF0449D2AEF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apartmani", "Apartmani\Apartmani.csproj", "{E3073F9F-1B91-4001-BA02-0F9E17D7506B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2FF4F9E-109E-4A17-88F0-56C611C356A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2FF4F9E-109E-4A17-88F0-56C611C356A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2FF4F9E-109E-4A17-88F0-56C611C356A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2FF4F9E-109E-4A17-88F0-56C611C356A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5E5B0EB-6077-4BBA-87D5-FF0449D2AEF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5E5B0EB-6077-4BBA-87D5-FF0449D2AEF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5E5B0EB-6077-4BBA-87D5-FF0449D2AEF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5E5B0EB-6077-4BBA-87D5-FF0449D2AEF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3073F9F-1B91-4001-BA02-0F9E17D7506B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3073F9F-1B91-4001-BA02-0F9E17D7506B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3073F9F-1B91-4001-BA02-0F9E17D7506B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3073F9F-1B91-4001-BA02-0F9E17D7506B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F7CD1EFD-5A21-49F1-A440-F587C35F295F}
+	EndGlobalSection
+EndGlobal

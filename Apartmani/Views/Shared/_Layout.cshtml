@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+     <div class=' navbar-expand navbar-light'>
+         <ul class='nav navbar-nav '>
+             <li class='nav-item '>
+                 <img src="~/Images/RWA_NavIcon.jfif" width="90" height="90" style="object-fit: cover; padding: 7px;" />
+             </li>
+             <li class='nav-item'>
+                 <b>   @Html.ActionLink("Log in", "Index", "Login", null, new { @class = "nav-link text-black" }) </b>
+             </li>
+
+             <li class='nav-item'>
+                 <b>    @Html.ActionLink("Registration", "Index", "Registration", null, new { @class = "nav-link text-black" }) </b>
+             </li>
+
+             <li class='nav-item '>
+                 <b>   @Html.ActionLink("Apartments", "Index", "Home", null, new { @class = "nav-link text-black" }) </b>
+             </li>
+
+
+         </ul>
+    </div>
+
+
+    <!--sve stvari iz htmla idu u htmlHelper-->
+    <div class="container" py-3>
+
+        @RenderBody()
+    </div>
+
+    <footer>
+        <p> <b>  RWA Apartments - Lara Kržak &copy; @DateTime.Now.Year </b></p> 
+    </footer>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    @RenderSection("scripts", required: false)
+
+    <!--background color-->
+    <style>
+        body {
+            background-color: lightpink;
+        }
+    </style>
+</body>
+
+</html>
